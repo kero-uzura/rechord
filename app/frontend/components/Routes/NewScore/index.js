@@ -106,6 +106,7 @@ export default class NewScore extends Component {
           capo={capo}
           loop={loop}
           volume={volume}
+          title={title}
           enabledClick={enabledClick}
           isPlaying={isPlaying}
           errors={errors}

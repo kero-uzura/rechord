@@ -14,9 +14,11 @@ import LoopControl       from "./LoopControl"
 import VolumeControl     from "./VolumeControl"
 import SoundControl      from "./SoundControl"
 import ErrorBoundary     from "../commons/ErrorBoundary"
+import Button            from "../commons/Button"
 import { validate }      from "./validate"
 import { scoreMaker }    from "../../utils/scoreMaker"
 import * as decorator    from "../../decorators/scoreEditorDecorator"
+import scoreToMidi       from "../../utils/scoreToMidi"
 
 export default class Score extends Component {
   constructor(props) {
@@ -46,6 +48,21 @@ export default class Score extends Component {
     this.props.handleSetState({ editorState }, false)
     this.props.setInputText(editorState.getCurrentContent().getPlainText(), false)
   }
+  handleClickToMidi = () => {
+    const { title, bpm } = this.props
+    const { score } = this.state
+
+    if (!score) return
+
+    const buffer = scoreToMidi(score, { tempo: bpm })
+    const url = URL.createObjectURL(new Blob([buffer], { type: 'audio/midi'}))
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${title || 'rechord'}.mid`
+    link.click()
+
+    URL.revokeObjectURL(url)
+  };
 
   render() {
     const {
@@ -150,6 +167,7 @@ export default class Score extends Component {
                 volume={volume}
                 handleSetState={handleSetState}
               />
+              <Button onClick={this.handleClickToMidi} text='Download MIDI' />
             </div>
           </div>
         </div>

@@ -102,6 +102,7 @@ export default class EditScore extends Component {
           capo={capo}
           loop={loop}
           volume={volume}
+          title={title}
           enabledClick={enabledClick}
           isPlaying={isPlaying}
           errors={errors}

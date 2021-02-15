@@ -11,6 +11,7 @@
     "classnames": "^2.2.5",
     "draft-js": "^0.10.4",
     "history": "^4.7.2",
+    "midi-writer-js": "^1.7.4",
     "moji": "^0.5.1",
     "qs": "^6.5.1",
     "react": "^16.0.0",
